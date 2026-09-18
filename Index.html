@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Василина Олейник — Пишущий редактор</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --gray: #6b6b6b;
+            --light-gray: #f5f5f5;
+            --burgundy: #7a1f2e;
+            --burgundy-light: #a8324a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: var(--light-gray);
+            z-index: 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--burgundy);
+            display: block;
+        }
+
+        .hero-role {
+            font-size: 1.1rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 30px;
+            padding-left: 0;
+            position: relative;
+        }
+
+        .hero-role::before {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 2px;
+            background: var(--burgundy);
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 500px;
+        }
+
+        .hero-photo {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-photo::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--burgundy);
+            z-index: -1;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gray);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        .section-number {
+            font-size: 0.85rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ===== PUBLICATIONS GRID ===== */
+        .publications {
+            display: grid;
+            gap: 0;
+        }
+
+        .publication {
+            padding: 25px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .publication:last-child {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .publication:hover {
+            padding-left: 15px;
+        }
+
+        .publication:hover .pub-title {
+            color: var(--burgundy);
+        }
+
+        .pub-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .pub-type {
+            font-size: 0.75rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .pub-source {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .pub-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+
+        .pub-desc {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ===== FLOATING CONTACT BUTTON ===== */
+        .contact-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .contact-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--burgundy);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(122, 31, 46, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(122, 31, 46, 0.6);
+        }
+
+        .contact-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--white);
+        }
+
+        .contact-btn.active {
+            background: var(--dark);
+        }
+
+        .contact-btn.active svg {
+            animation: rotate 0.3s ease;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(180deg); }
+        }
+
+        .contact-menu {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            min-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .contact-menu-title {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item:hover {
+            background: var(--light-gray);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--burgundy);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-photo {
+                order: -1;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .hero-photo::after {
+                display: none;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .publication {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 20px 0;
+            }
+
+            .contact-fab {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .contact-menu {
+                min-width: 260px;
+                right: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-role">Пишущий редактор</p>
+                    <h1>Василина<span>Олейник</span></h1>
+                    <p class="hero-desc">
+                        Опыт работы в деловой, информационной и лайфстайл-тематиках. 
+                        Специализируюсь на экспертных и аналитических материалах и создании 
+                        имиджевых спецпроектов для крупных стейкхолдеров.
+                    </p>
+                </div>
+                <div class="hero-photo">
+                    <img src="photo.jpg" alt="Василина Олейник">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint">↓ Листайте</div>
+    </section>
+
+    <!-- SECTION 1 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01 / Экспертиза</span>
+                <h2 class="section-title">Экспертная аналитика и интервью</h2>
+                <p class="section-subtitle">Глубокие материалы с комментариями отраслевых экспертов, анализ трендов и рынков.</p>
+            </div>
+            <div class="publications">
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Интервью</span>
+                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Костяк наших решений — это всегда наш внутренний анализ</h3>
+                        <p class="pub-desc">Интервью о роли комплаенса банка в условиях законодательных нововведений и при принятии стратегических бизнес-решений.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Интервью</span>
+                        <span class="pub-source">РБК-Татарстан</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Кирилл Булгаков: Дефицит айтишников не катастрофический, но существенный</h3>
+                        <p class="pub-desc">Анализ кадрового рынка IT-сектора: почему дефицит есть, но он управляем, и как компании адаптируются к новым реалиям.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Лонгрид</span>
+                        <span class="pub-source">РБК-Татарстан</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Уход от санкций: крупные промышленники решили готовить кадры по-новому</h3>
+                        <p class="pub-desc">Материал о том, как промышленные гиганты перестраивают системы образования и наставничества под свои нужды в условиях импортозамещения.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Интервью</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">«Теперь это рынок покупателя»: в Татарстане восстанавливается спрос на «вторичку»</h3>
+                        <p class="pub-desc">Экспертный разбор текущей ситуации на рынке вторичной недвижимости региона.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Обзор</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">«По традиции сначала ажиотаж»: эксперты о том, как рост ключевой ставки отразится на рынке ипотеки</h3>
+                        <p class="pub-desc">Прогноз экспертов и реальные цифры по ипотечному кредитованию в период макроэкономических изменений.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02 / Финансы</span>
+                <h2 class="section-title">Финансовая журналистика и банковский сектор</h2>
+                <p class="section-subtitle">Специализированные материалы о сложных финансовых инструментах и инновациях.</p>
+            </div>
+            <div class="publications">
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Сайт Ак Барс Банка</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Ак Барс Банк заключил первую сделку по исламскому факторингу</h3>
+                        <p class="pub-desc">Сообщение о первой сделке с комментариями.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Ак Барс Банк нарастил факторинговый портфель до 36,5 млрд рублей</h3>
+                        <p class="pub-desc">Материал о пионерском опыте внедрения норм исламского финансирования в российский факторинговый рынок.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Ак Барс Банк выступил соорганизатором в размещении первого в истории российского рынка выпуска облигаций сукук</h3>
+                        <p class="pub-desc">Сообщение о новом продукте и роли банка как соорганизатора исторического для РФ рынка выпуска исламских облигаций.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Лонгрид</span>
+                        <span class="pub-source">Сайт Ак Барс Банка</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Ак Барс Банк представил «пилот» по выплате субсидий цифровым рублем</h3>
+                        <p class="pub-desc">Обзор инновационного банковского продукта и его значения для цифровизации государственных услуг.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03 / Спецпроекты</span>
+                <h2 class="section-title">Спецпроекты и нативная журналистика</h2>
+                <p class="section-subtitle">Масштабные имиджевые проекты, сочетающие журналистские стандарты с задачами продвижения. Выступала главным редактором проекта.</p>
+            </div>
+            <div class="publications">
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Лонгрид</span>
+                        <span class="pub-source">tatarstan.top</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Агропромышленный комплекс Татарстана: 146 млрд рублей инвестиций</h3>
+                        <p class="pub-desc">Комплексный обзор инвестиционной привлекательности АПК региона с цифрами, кейсами и планами развития.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Лонгрид</span>
+                        <span class="pub-source">tatarstan.top</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">От Нурлата до Альметьевска: какие дороги обновят в Татарстане в 2025 году</h3>
+                        <p class="pub-desc">Социально ориентированный материал о масштабной инфраструктурной модернизации, понятный и полезный для жителей.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Лонгрид</span>
+                        <span class="pub-source">tatarstan.top</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Голубые озера Казани: от эковорот по дорожкам с навигацией к купелям</h3>
+                        <p class="pub-desc">Экологический спецпроект о трансформации природного парка и улучшении туристической инфраструктуры.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Татар-информ</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Трек «Минем дустым – Минниханов Рустам» набрал свыше 11 млн просмотров</h3>
+                        <p class="pub-desc">Освещение вирусного феномена (нативное продвижение Раиса РТ) с акцентом на метрики вовлеченности аудитории.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Татар-информ</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Блогеры из Татарстана тестируют голосовой помощник «Раис», разработанный в РТ</h3>
+                        <p class="pub-desc">Материал для молодой цифровой аудитории в рамках нативного продвижения Раиса РТ.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04 / Лайфстайл</span>
+                <h2 class="section-title">Лайфстайл, туризм и обзоры</h2>
+                <p class="section-subtitle">Полезные и вовлекающие материалы для широкой аудитории.</p>
+            </div>
+            <div class="publications">
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Гид</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Где найти снег в июне, коня в театре и почему нельзя крутить пироги: едем из Казани в Северную Осетию</h3>
+                        <p class="pub-desc">Нестандартный travel-гид с локальными инсайдами, культурными кодами и практическими советами для путешественников.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Гид</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Шишки в шоколаде, острог с воеводой и подземелья татарского бая: 7 причин лететь в Томск</h3>
+                        <p class="pub-desc">Подборка неочевидных туристических маршрутов и исторических загадок региона.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Обзор</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Супервыгодно для инвестиций: 10 объектов культурного наследия, которые продают в Казани сейчас</h3>
+                        <p class="pub-desc">Уникальная подборка исторических зданий с потенциалом для редевелопмента и бизнес-проектов.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">Новый курорт с яхтенной мариной построят за 16 млрд рублей в Лаишево</h3>
+                        <p class="pub-desc">Оперативное освещение крупных инфраструктурных проектов в регионе.</p>
+                    </div>
+                </article>
+                <article class="publication">
+                    <div class="pub-meta">
+                        <span class="pub-type">Новость</span>
+                        <span class="pub-source">Казанские ведомости</span>
+                    </div>
+                    <div>
+                        <h3 class="pub-title">«Флот РТ» обсуждает внедрение онлайн-продаж билетов на суда с IT-подразделением крупного туроператора</h3>
+                        <p class="pub-desc">Материал о цифровизации регионального туризма и партнерстве с федеральными игроками.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING CONTACT BUTTON -->
+    <div class="contact-fab">
+        <div class="contact-menu" id="contactMenu">
+            <div class="contact-menu-title">Связаться со мной</div>
+            
+            <a href="tel:+79872644469" class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-label">Телефон</span>
+                    <span class="contact-value">+7 987 264 44 69</span>
+                </div>
+            </a>
+
+            <a href="https://t.me/vvo_23" target="_blank" class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-label">Telegram</span>
+                    <span class="contact-value">@vvo_23</span>
+                </div>
+            </a>
+
+            <a href="mailto:ole-vasilina@yandex.ru" class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">ole-vasilina@yandex.ru</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="contact-btn" id="contactBtn" aria-label="Связаться">
+            <svg viewBox="0 0 24 24" id="contactIcon">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const contactBtn = document.getElementById('contactBtn');
+        const contactMenu = document.getElementById('contactMenu');
+        const contactIcon = document.getElementById('contactIcon');
+
+        contactBtn.addEventListener('click', function() {
+            contactMenu.classList.toggle('active');
+            contactBtn.classList.toggle('active');
+            
+            if (contactMenu.classList.contains('active')) {
+                contactIcon.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
+            } else {
+                contactIcon.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>';
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!contactBtn.contains(event.target) && !contactMenu.contains(event.target)) {
+                contactMenu.classList.remove('active');
+                contactBtn.classList.remove('active');
+                contactIcon.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>';
+            }
+        });
+    </script>
+
+</body>
+</html>
