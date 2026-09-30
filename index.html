@@ -1,781 +1,685 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Василина Олейник — Пишущий редактор</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Василина Олейник — пишущий редактор</title>
+<meta name="description" content="Портфолио Василины Олейник: экспертная аналитика, финансовая журналистика, спецпроекты, лайфстайл и travel.">
+<meta property="og:title" content="Василина Олейник — пишущий редактор">
+<meta property="og:description" content="Экспертная аналитика, финансовая журналистика, имиджевые спецпроекты, travel-гиды.">
+<meta property="og:image" content="assets/photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#ffffff;
+  --paper:#faf9f8;
+  --ink:#2b2d2f;
+  --ink-soft:#5d6265;
+  --line:#e3e1de;
+  --wine:#7a1f2e;
+  --wine-soft:#a8475a;
+  --wine-tint:#f6eef0;
+  --max:1120px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
 
-        :root {
-            --white: #ffffff;
-            --dark: #1a1a1a;
-            --gray: #6b6b6b;
-            --light-gray: #f5f5f5;
-            --burgundy: #7a1f2e;
-            --burgundy-light: #a8324a;
-        }
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:62px;}
+.nav__name{font-family:'Lora',Georgia,serif;font-size:17px;letter-spacing:.01em;white-space:nowrap;}
+.nav__links{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14px;overflow-x:auto;scrollbar-width:none;}
+.nav__links::-webkit-scrollbar{display:none;}
+.nav__links a{text-decoration:none;color:var(--ink-soft);white-space:nowrap;padding-bottom:2px;border-bottom:1px solid transparent;transition:color .18s,border-color .18s;}
+.nav__links a:hover{color:var(--wine);border-color:var(--wine);}
 
-        html {
-            scroll-behavior: smooth;
-        }
+/* ---------- hero ---------- */
+.hero{padding:88px 0 76px;border-bottom:1px solid var(--line);}
+.hero__grid{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start;}
+.hero__photo{
+  width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+  border-bottom:3px solid var(--wine);
+}
+.eyebrow{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wine);font-weight:600;margin:0 0 18px;
+}
+h1{
+  font-family:'Lora',Georgia,serif;font-weight:500;
+  font-size:clamp(38px,5.4vw,60px);line-height:1.08;margin:0 0 22px;letter-spacing:-.01em;
+}
+.hero__lead{font-size:19px;line-height:1.68;color:var(--ink-soft);max-width:60ch;margin:0 0 30px;}
+.hero__lead strong{color:var(--ink);font-weight:500;}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;}
+.btn{
+  display:inline-block;text-decoration:none;font-size:15px;
+  padding:11px 24px;border:1px solid var(--wine);transition:all .2s ease;
+}
+.btn--solid{background:var(--wine);color:#fff;}
+.btn--solid:hover{background:#5f1723;border-color:#5f1723;}
+.btn--ghost{
+  color:var(--wine);background:transparent;font-family:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.btn--ghost:hover{background:var(--wine-tint);}
+.btn__chev{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s ease;}
+.btn--ghost[aria-expanded="true"] .btn__chev{transform:rotate(180deg);}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            color: var(--dark);
-            background: var(--white);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ---------- reveal contacts ---------- */
+.reveal{margin-top:22px;display:flex;flex-direction:column;gap:2px;max-width:380px;}
+.reveal__item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px 8px 16px;border:1px solid var(--line);background:#fff;
+  opacity:0;transform:translateY(-10px);
+  transition:background .2s ease,border-color .2s ease;
+}
+.reveal__link{display:flex;align-items:center;gap:14px;text-decoration:none;flex:1;min-width:0;padding:4px 0;}
+.reveal.is-open .reveal__item{animation:revealIn .42s cubic-bezier(.2,.75,.3,1) forwards;}
+.reveal.is-open .reveal__item:nth-child(1){animation-delay:.02s;}
+.reveal.is-open .reveal__item:nth-child(2){animation-delay:.10s;}
+.reveal.is-open .reveal__item:nth-child(3){animation-delay:.18s;}
+@keyframes revealIn{to{opacity:1;transform:translateY(0);}}
+.reveal__item:hover{background:var(--wine-tint);border-color:var(--wine);}
+.reveal__ico{
+  flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;
+  background:var(--wine-tint);color:var(--wine);border-radius:50%;
+}
+.reveal__link:hover .reveal__ico{background:var(--wine);color:#fff;}
+.reveal__ico svg{width:18px;height:18px;fill:currentColor;}
+.reveal__txt{display:flex;flex-direction:column;line-height:1.35;}
+.reveal__txt b{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.reveal__txt i{font-style:normal;font-size:16px;color:var(--ink);}
+.reveal__link:hover .reveal__txt i{color:var(--wine);}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
+/* ---------- copy button ---------- */
+.copy{
+  flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
+  background:transparent;border:1px solid var(--line);color:var(--ink-soft);
+  padding:0;transition:background .18s,border-color .18s,color .18s;position:relative;
+}
+.copy:hover{border-color:var(--wine);color:var(--wine);background:var(--wine-tint);}
+.copy::before{
+  content:"";display:block;width:16px;height:16px;
+  -webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat;
+  background:currentColor;
+  --ico:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='11' height='12' rx='1.5'/><path d='M5 15V4.5A1.5 1.5 0 0 1 6.5 3H15'/></svg>");
+}
+.copy.is-done{border-color:var(--wine);color:var(--wine);background:var(--wine-tint);}
+.copy.is-done::before{
+  --ico:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>");
+  animation:pop .3s ease;
+}
+@keyframes pop{0%{transform:scale(.5);opacity:.3}100%{transform:scale(1);opacity:1}}
+.copy::after{
+  content:"Скопировано";position:absolute;bottom:calc(100% + 8px);right:0;
+  background:var(--ink);color:#fff;font-size:11px;letter-spacing:.04em;
+  padding:4px 9px;white-space:nowrap;opacity:0;transform:translateY(4px);
+  pointer-events:none;transition:opacity .2s,transform .2s;
+}
+.copy.is-done::after{opacity:1;transform:translateY(0);}
+.copy--dark{border-color:#4a4d50;color:#b9bec1;}
+.copy--dark:hover{border-color:#e8b9c3;color:#e8b9c3;background:rgba(232,185,195,.12);}
+.copy--dark.is-done{border-color:#e8b9c3;color:#e8b9c3;background:rgba(232,185,195,.12);}
+.copy--dark::after{background:#fff;color:var(--ink);}
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--white);
-        }
+/* ---------- facts ---------- */
+.facts{border-bottom:1px solid var(--line);background:var(--paper);}
+.facts__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
+.fact{background:var(--paper);padding:34px 28px;}
+.fact__num{font-family:'Lora',serif;font-size:32px;color:var(--wine);line-height:1;margin-bottom:10px;}
+.fact__label{font-size:14px;color:var(--ink-soft);line-height:1.5;}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45%;
-            height: 100%;
-            background: var(--light-gray);
-            z-index: 0;
-        }
+/* ---------- sections ---------- */
+section{padding:84px 0;border-bottom:1px solid var(--line);}
+.sec__head{max-width:70ch;margin-bottom:46px;}
+.sec__index{font-size:12px;letter-spacing:.18em;color:var(--wine);font-weight:600;margin:0 0 14px;}
+h2{font-family:'Lora',Georgia,serif;font-weight:500;font-size:clamp(26px,3.2vw,34px);line-height:1.2;margin:0 0 14px;}
+.sec__desc{color:var(--ink-soft);margin:0;font-size:17px;}
 
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
+.card{
+  background:#fff;border:1px solid var(--line);
+  padding:28px 26px 30px;text-decoration:none;display:flex;flex-direction:column;gap:12px;
+  transition:background .2s ease,border-color .2s ease;position:relative;
+}
+.card:hover{background:var(--wine-tint);border-color:var(--wine);}
+.card__meta{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--wine);font-weight:600;}
+.card__title{font-family:'Lora',Georgia,serif;font-size:19px;line-height:1.38;font-weight:500;margin:0;}
+.card:hover .card__title{color:var(--wine);}
+.card__desc{font-size:15px;color:var(--ink-soft);line-height:1.6;margin:0;}
+.card__arrow{margin-top:auto;padding-top:14px;font-size:13px;color:var(--ink-soft);letter-spacing:.04em;}
+.card:hover .card__arrow{color:var(--wine);}
+.card__arrow::after{content:" →";transition:margin .2s;}
+.card:hover .card__arrow::after{margin-left:4px;}
 
-        .hero-text h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
+/* ---------- contacts ---------- */
+#contacts{border-bottom:none;background:var(--ink);color:#fff;}
+#contacts h2{color:#fff;}
+#contacts .sec__index{color:#d9a2ad;}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;margin-top:8px;}
+.contact__item{display:block;text-decoration:none;}
+.contact__label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a4;margin-bottom:10px;}
+.contact__value{font-family:'Lora',serif;font-size:24px;color:#fff;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
+.contact__item:hover .contact__value{color:#e8b9c3;border-color:#e8b9c3;}
+.contact__head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.contact__ico{
+  width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:50%;
+  background:rgba(255,255,255,.1);color:#e8b9c3;transition:background .2s,color .2s;
+}
+.contact__ico svg{width:17px;height:17px;fill:currentColor;}
+.contact__item:hover .contact__ico{background:#e8b9c3;color:var(--ink);}
+.contact__row{display:flex;align-items:center;gap:14px;}
+.contact__value{display:inline-block;text-decoration:none;}
 
-        .hero-text h1 span {
-            color: var(--burgundy);
-            display: block;
-        }
+/* ---------- floating contact button ---------- */
+.fab{
+  position:fixed;right:24px;bottom:24px;z-index:80;
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+  opacity:0;visibility:hidden;transform:translateY(16px) scale(.94);
+  transition:opacity .32s ease,transform .32s cubic-bezier(.2,.75,.3,1),visibility .32s;
+}
+.fab.is-visible{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.fab__menu{display:flex;flex-direction:column;align-items:flex-end;gap:9px;}
+.fab__link{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  background:#fff;color:var(--ink);border:1px solid var(--line);
+  padding:9px 15px 9px 11px;border-radius:40px;font-size:14px;white-space:nowrap;
+  box-shadow:0 6px 22px rgba(43,45,47,.14);
+  opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;
+  transition:opacity .26s ease,transform .26s cubic-bezier(.2,.75,.3,1),background .2s,border-color .2s;
+}
+.fab.is-open .fab__link{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.fab.is-open .fab__link:nth-child(1){transition-delay:.14s;}
+.fab.is-open .fab__link:nth-child(2){transition-delay:.07s;}
+.fab.is-open .fab__link:nth-child(3){transition-delay:0s;}
+.fab__link:hover{background:var(--wine-tint);border-color:var(--wine);color:var(--wine);}
+.fab__link svg{width:17px;height:17px;fill:var(--wine);flex:0 0 17px;}
+.fab__btn{
+  display:flex;align-items:center;gap:9px;cursor:pointer;font-family:inherit;font-size:15px;
+  background:var(--wine);color:#fff;border:none;border-radius:40px;padding:14px 22px;
+  box-shadow:0 8px 26px rgba(122,31,46,.34);
+  transition:background .2s ease,box-shadow .2s ease;
+}
+.fab__btn:hover{background:#5f1723;}
+.fab__btn svg{width:18px;height:18px;fill:currentColor;transition:transform .3s ease;}
+.fab.is-open .fab__btn svg{transform:rotate(135deg);}
+.fab__btn .fab__plus{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;}
 
-        .hero-role {
-            font-size: 1.1rem;
-            color: var(--burgundy);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 30px;
-            padding-left: 0;
-            position: relative;
-        }
-
-        .hero-role::before {
-            content: '';
-            display: inline-block;
-            width: 40px;
-            height: 2px;
-            background: var(--burgundy);
-            margin-right: 15px;
-            vertical-align: middle;
-        }
-
-        .hero-desc {
-            font-size: 1.15rem;
-            color: var(--gray);
-            line-height: 1.7;
-            max-width: 500px;
-        }
-
-        .hero-photo {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-        }
-
-        .hero-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hero-photo::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--burgundy);
-            z-index: -1;
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--gray);
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(8px); }
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 60px 0;
-            position: relative;
-        }
-
-        .section:nth-child(even) {
-            background: var(--light-gray);
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-            max-width: 700px;
-        }
-
-        .section-number {
-            font-size: 0.85rem;
-            color: var(--burgundy);
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        /* ===== PUBLICATIONS GRID ===== */
-        .publications {
-            display: grid;
-            gap: 0;
-        }
-
-        .publication {
-            padding: 25px 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            align-items: start;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .publication:last-child {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .publication:hover {
-            padding-left: 15px;
-        }
-
-        .publication:hover .pub-title {
-            color: var(--burgundy);
-        }
-
-        .pub-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .pub-type {
-            font-size: 0.75rem;
-            color: var(--burgundy);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .pub-source {
-            font-size: 0.85rem;
-            color: var(--gray);
-            font-style: italic;
-        }
-
-        .pub-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 10px;
-            color: var(--dark);
-            transition: color 0.3s ease;
-        }
-
-        .pub-desc {
-            font-size: 0.95rem;
-            color: var(--gray);
-            line-height: 1.5;
-        }
-
-        /* ===== FLOATING CONTACT BUTTON ===== */
-        .contact-fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .contact-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--burgundy);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(122, 31, 46, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1001;
-        }
-
-        .contact-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(122, 31, 46, 0.6);
-        }
-
-        .contact-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--white);
-        }
-
-        .contact-btn.active {
-            background: var(--dark);
-        }
-
-        .contact-btn.active svg {
-            animation: rotate 0.3s ease;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(180deg); }
-        }
-
-        .contact-menu {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            min-width: 280px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-
-        .contact-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .contact-menu-title {
-            font-size: 0.85rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px;
-            text-decoration: none;
-            color: var(--dark);
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            margin-bottom: 8px;
-        }
-
-        .contact-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .contact-item:hover {
-            background: var(--light-gray);
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .contact-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--burgundy);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .contact-label {
-            font-size: 0.75rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .contact-value {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .container {
-                padding: 0 25px;
-            }
-
-            .hero::before {
-                display: none;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .hero-photo {
-                order: -1;
-                max-width: 350px;
-                margin: 0 auto;
-            }
-
-            .hero-photo::after {
-                display: none;
-            }
-
-            .section {
-                padding: 40px 0;
-            }
-
-            .publication {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                padding: 20px 0;
-            }
-
-            .contact-fab {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .contact-menu {
-                min-width: 260px;
-                right: -10px;
-            }
-        }
-    </style>
+@media (max-width:860px){
+  .hero{padding:52px 0 48px;}
+  .hero__grid{grid-template-columns:1fr;gap:32px;}
+  .hero__photo{max-width:240px;}
+  .facts__grid{grid-template-columns:repeat(2,1fr);}
+  section{padding:58px 0;}
+  .cards{grid-template-columns:1fr;}
+}
+@media (max-width:520px){
+  body{font-size:16px;}
+  .wrap{padding:0 20px;}
+  .nav__name{font-size:15px;}
+  .facts__grid{grid-template-columns:1fr;}
+  .hero__lead{font-size:17px;}
+  .reveal__txt i{font-size:15px;}
+  .fab{right:16px;bottom:16px;}
+  .fab__btn{padding:13px 20px;font-size:14px;}
+  .fab__link{font-size:13px;padding:8px 13px 8px 10px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
+</style>
 </head>
 <body>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="hero-role">Пишущий редактор</p>
-                    <h1>Василина<span>Олейник</span></h1>
-                    <p class="hero-desc">
-                        Опыт работы в деловой, информационной и лайфстайл-тематиках. 
-                        Специализируюсь на экспертных и аналитических материалах и создании 
-                        имиджевых спецпроектов для крупных стейкхолдеров.
-                    </p>
-                </div>
-                <div class="hero-photo">
-                    <img src="photo.jpg" alt="Василина Олейник">
-                </div>
-            </div>
-        </div>
-        <div class="scroll-hint">↓ Листайте</div>
-    </section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+    </symbol>
+    <symbol id="i-tg" viewBox="0 0 24 24">
+      <path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.2c-.3.3-.5.5-1 .5l.4-4.9 9-8.1c.4-.3-.1-.5-.6-.2L7.1 12.7l-4.8-1.5c-1-.3-1-1 .2-1.5l18.8-7.2c.9-.3 1.6.2 1.3 1.8z"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <path d="M3 5.5h18c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1v-11c0-.6.4-1 1-1zm.8 2L12 13l8.2-5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <path d="M9 9h10v12H9zM5 3h10v3M5 3v12h3M5 3h0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
 
-    <!-- SECTION 1 -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-number">01 / Экспертиза</span>
-                <h2 class="section-title">Экспертная аналитика и интервью</h2>
-                <p class="section-subtitle">Глубокие материалы с комментариями отраслевых экспертов, анализ трендов и рынков.</p>
-            </div>
-            <div class="publications">
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Интервью</span>
-                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Костяк наших решений — это всегда наш внутренний анализ</h3>
-                        <p class="pub-desc">Интервью о роли комплаенса банка в условиях законодательных нововведений и при принятии стратегических бизнес-решений.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Интервью</span>
-                        <span class="pub-source">РБК-Татарстан</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Кирилл Булгаков: Дефицит айтишников не катастрофический, но существенный</h3>
-                        <p class="pub-desc">Анализ кадрового рынка IT-сектора: почему дефицит есть, но он управляем, и как компании адаптируются к новым реалиям.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Лонгрид</span>
-                        <span class="pub-source">РБК-Татарстан</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Уход от санкций: крупные промышленники решили готовить кадры по-новому</h3>
-                        <p class="pub-desc">Материал о том, как промышленные гиганты перестраивают системы образования и наставничества под свои нужды в условиях импортозамещения.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Интервью</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">«Теперь это рынок покупателя»: в Татарстане восстанавливается спрос на «вторичку»</h3>
-                        <p class="pub-desc">Экспертный разбор текущей ситуации на рынке вторичной недвижимости региона.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Обзор</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">«По традиции сначала ажиотаж»: эксперты о том, как рост ключевой ставки отразится на рынке ипотеки</h3>
-                        <p class="pub-desc">Прогноз экспертов и реальные цифры по ипотечному кредитованию в период макроэкономических изменений.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+<nav class="nav">
+  <div class="wrap">
+    <span class="nav__name">Василина Олейник</span>
+    <ul class="nav__links">
+      <li><a href="#analytics">Аналитика</a></li>
+      <li><a href="#finance">Финансы</a></li>
+      <li><a href="#special">Спецпроекты</a></li>
+      <li><a href="#lifestyle">Лайфстайл</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- SECTION 2 -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-number">02 / Финансы</span>
-                <h2 class="section-title">Финансовая журналистика и банковский сектор</h2>
-                <p class="section-subtitle">Специализированные материалы о сложных финансовых инструментах и инновациях.</p>
-            </div>
-            <div class="publications">
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Сайт Ак Барс Банка</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Ак Барс Банк заключил первую сделку по исламскому факторингу</h3>
-                        <p class="pub-desc">Сообщение о первой сделке с комментариями.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Ак Барс Банк нарастил факторинговый портфель до 36,5 млрд рублей</h3>
-                        <p class="pub-desc">Материал о пионерском опыте внедрения норм исламского финансирования в российский факторинговый рынок.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Коммерсантъ-Волга-Урал</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Ак Барс Банк выступил соорганизатором в размещении первого в истории российского рынка выпуска облигаций сукук</h3>
-                        <p class="pub-desc">Сообщение о новом продукте и роли банка как соорганизатора исторического для РФ рынка выпуска исламских облигаций.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Лонгрид</span>
-                        <span class="pub-source">Сайт Ак Барс Банка</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Ак Барс Банк представил «пилот» по выплате субсидий цифровым рублем</h3>
-                        <p class="pub-desc">Обзор инновационного банковского продукта и его значения для цифровизации государственных услуг.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3 -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-number">03 / Спецпроекты</span>
-                <h2 class="section-title">Спецпроекты и нативная журналистика</h2>
-                <p class="section-subtitle">Масштабные имиджевые проекты, сочетающие журналистские стандарты с задачами продвижения. Выступала главным редактором проекта.</p>
-            </div>
-            <div class="publications">
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Лонгрид</span>
-                        <span class="pub-source">tatarstan.top</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Агропромышленный комплекс Татарстана: 146 млрд рублей инвестиций</h3>
-                        <p class="pub-desc">Комплексный обзор инвестиционной привлекательности АПК региона с цифрами, кейсами и планами развития.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Лонгрид</span>
-                        <span class="pub-source">tatarstan.top</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">От Нурлата до Альметьевска: какие дороги обновят в Татарстане в 2025 году</h3>
-                        <p class="pub-desc">Социально ориентированный материал о масштабной инфраструктурной модернизации, понятный и полезный для жителей.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Лонгрид</span>
-                        <span class="pub-source">tatarstan.top</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Голубые озера Казани: от эковорот по дорожкам с навигацией к купелям</h3>
-                        <p class="pub-desc">Экологический спецпроект о трансформации природного парка и улучшении туристической инфраструктуры.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Татар-информ</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Трек «Минем дустым – Минниханов Рустам» набрал свыше 11 млн просмотров</h3>
-                        <p class="pub-desc">Освещение вирусного феномена (нативное продвижение Раиса РТ) с акцентом на метрики вовлеченности аудитории.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Татар-информ</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Блогеры из Татарстана тестируют голосовой помощник «Раис», разработанный в РТ</h3>
-                        <p class="pub-desc">Материал для молодой цифровой аудитории в рамках нативного продвижения Раиса РТ.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4 -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-number">04 / Лайфстайл</span>
-                <h2 class="section-title">Лайфстайл, туризм и обзоры</h2>
-                <p class="section-subtitle">Полезные и вовлекающие материалы для широкой аудитории.</p>
-            </div>
-            <div class="publications">
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Гид</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Где найти снег в июне, коня в театре и почему нельзя крутить пироги: едем из Казани в Северную Осетию</h3>
-                        <p class="pub-desc">Нестандартный travel-гид с локальными инсайдами, культурными кодами и практическими советами для путешественников.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Гид</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Шишки в шоколаде, острог с воеводой и подземелья татарского бая: 7 причин лететь в Томск</h3>
-                        <p class="pub-desc">Подборка неочевидных туристических маршрутов и исторических загадок региона.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Обзор</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Супервыгодно для инвестиций: 10 объектов культурного наследия, которые продают в Казани сейчас</h3>
-                        <p class="pub-desc">Уникальная подборка исторических зданий с потенциалом для редевелопмента и бизнес-проектов.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">Новый курорт с яхтенной мариной построят за 16 млрд рублей в Лаишево</h3>
-                        <p class="pub-desc">Оперативное освещение крупных инфраструктурных проектов в регионе.</p>
-                    </div>
-                </article>
-                <article class="publication">
-                    <div class="pub-meta">
-                        <span class="pub-type">Новость</span>
-                        <span class="pub-source">Казанские ведомости</span>
-                    </div>
-                    <div>
-                        <h3 class="pub-title">«Флот РТ» обсуждает внедрение онлайн-продаж билетов на суда с IT-подразделением крупного туроператора</h3>
-                        <p class="pub-desc">Материал о цифровизации регионального туризма и партнерстве с федеральными игроками.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- FLOATING CONTACT BUTTON -->
-    <div class="contact-fab">
-        <div class="contact-menu" id="contactMenu">
-            <div class="contact-menu-title">Связаться со мной</div>
-            
-            <a href="tel:+79872644469" class="contact-item">
-                <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
-                </div>
-                <div class="contact-info">
-                    <span class="contact-label">Телефон</span>
-                    <span class="contact-value">+7 987 264 44 69</span>
-                </div>
-            </a>
-
-            <a href="https://t.me/vvo_23" target="_blank" class="contact-item">
-                <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-                    </svg>
-                </div>
-                <div class="contact-info">
-                    <span class="contact-label">Telegram</span>
-                    <span class="contact-value">@vvo_23</span>
-                </div>
-            </a>
-
-            <a href="mailto:ole-vasilina@yandex.ru" class="contact-item">
-                <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                </div>
-                <div class="contact-info">
-                    <span class="contact-label">Email</span>
-                    <span class="contact-value">ole-vasilina@yandex.ru</span>
-                </div>
-            </a>
-        </div>
-
-        <button class="contact-btn" id="contactBtn" aria-label="Связаться">
-            <svg viewBox="0 0 24 24" id="contactIcon">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-            </svg>
+<header class="hero">
+  <div class="wrap hero__grid">
+    <img class="hero__photo" src="assets/photo.jpg" alt="Василина Олейник">
+    <div>
+      <p class="eyebrow">Пишущий редактор</p>
+      <h1>Василина<br>Олейник</h1>
+      <p class="hero__lead">
+        Работаю в <strong>деловой, информационной и лайфстайл-тематиках</strong>.
+        Специализируюсь на экспертных и аналитических материалах и создании
+        имиджевых спецпроектов для крупных стейкхолдеров.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--solid" href="#analytics">Смотреть работы</a>
+        <button class="btn btn--ghost" id="heroToggle" type="button" aria-expanded="false" aria-controls="heroContacts">
+          <span>Связаться</span>
+          <svg class="btn__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
+      </div>
+
+      <div class="reveal" id="heroContacts" hidden>
+        <div class="reveal__item">
+          <a class="reveal__link" href="tel:+79872644469">
+            <span class="reveal__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <span class="reveal__txt"><b>Телефон</b><i>+7 987 264 44 69</i></span>
+          </a>
+          <button class="copy" type="button" data-copy="+79872644469" aria-label="Скопировать телефон"></button>
+        </div>
+        <div class="reveal__item">
+          <a class="reveal__link" href="https://t.me/vvo_23" target="_blank" rel="noopener">
+            <span class="reveal__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tg"/></svg></span>
+            <span class="reveal__txt"><b>Telegram</b><i>@vvo_23</i></span>
+          </a>
+          <button class="copy" type="button" data-copy="@vvo_23" aria-label="Скопировать телеграм"></button>
+        </div>
+        <div class="reveal__item">
+          <a class="reveal__link" href="mailto:ole-vasilina@yandex.ru">
+            <span class="reveal__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg></span>
+            <span class="reveal__txt"><b>Почта</b><i>ole-vasilina@yandex.ru</i></span>
+          </a>
+          <button class="copy" type="button" data-copy="ole-vasilina@yandex.ru" aria-label="Скопировать почту"></button>
+        </div>
+      </div>
     </div>
+  </div>
+</header>
 
-    <script>
-        const contactBtn = document.getElementById('contactBtn');
-        const contactMenu = document.getElementById('contactMenu');
-        const contactIcon = document.getElementById('contactIcon');
+<div class="facts">
+  <div class="wrap">
+    <div class="facts__grid">
+      <div class="fact"><div class="fact__num">4</div><div class="fact__label">направления: деловая и финансовая аналитика, лайфстайл, спецпроекты и имиджевое продвижение</div></div>
+      <div class="fact"><div class="fact__num">19</div><div class="fact__label">публикаций в портфолио со ссылками на материалы</div></div>
+      <div class="fact"><div class="fact__num">6</div><div class="fact__label">изданий и площадок: Ъ, РБК, Татар-информ и другие</div></div>
+      <div class="fact"><div class="fact__num">20+</div><div class="fact__label">лет работы в медиа</div></div>
+    </div>
+  </div>
+</div>
 
-        contactBtn.addEventListener('click', function() {
-            contactMenu.classList.toggle('active');
-            contactBtn.classList.toggle('active');
-            
-            if (contactMenu.classList.contains('active')) {
-                contactIcon.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
-            } else {
-                contactIcon.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>';
-            }
-        });
 
-        document.addEventListener('click', function(event) {
-            if (!contactBtn.contains(event.target) && !contactMenu.contains(event.target)) {
-                contactMenu.classList.remove('active');
-                contactBtn.classList.remove('active');
-                contactIcon.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>';
-            }
-        });
-    </script>
+<section id="analytics">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="sec__index">01 — Направление</p>
+      <h2>Экспертная аналитика и интервью</h2>
+      <p class="sec__desc">Глубокие материалы с комментариями отраслевых экспертов, анализ трендов и рынков.</p>
+    </div>
+    <div class="cards">
 
+      <a class="card" href="https://www.kommersant.ru/doc/8923120" target="_blank" rel="noopener">
+        <div class="card__meta">Интервью · Коммерсантъ-Волга-Урал</div>
+        <p class="card__title">«Костяк наших решений — это всегда наш внутренний анализ»</p>
+        <p class="card__desc">О роли комплаенса банка в условиях законодательных нововведений и при принятии стратегических бизнес-решений.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://rt.plus.rbc.ru/news/658041d47a8aa93af1577e18" target="_blank" rel="noopener">
+        <div class="card__meta">Интервью · РБК-Татарстан</div>
+        <p class="card__title">Кирилл Булгаков: «Дефицит айтишников не катастрофический, но существенный»</p>
+        <p class="card__desc">Анализ кадрового рынка IT-сектора: почему дефицит есть, но он управляем, и как компании адаптируются к новым реалиям.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://rt.rbc.ru/tatarstan/17/10/2023/652cedde9a7947437a9d8805" target="_blank" rel="noopener">
+        <div class="card__meta">Лонгрид · РБК-Татарстан</div>
+        <p class="card__title">Уход от санкций: крупные промышленники решили готовить кадры по-новому</p>
+        <p class="card__desc">Как промышленные гиганты перестраивают системы образования и наставничества под свои нужды в условиях импортозамещения.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/teper-eto-rynok-pokupatelya-v-tatarstane-vosstanavlivaetsya-spros-na-vtoricku-5854788" target="_blank" rel="noopener">
+        <div class="card__meta">Интервью · Казанские ведомости</div>
+        <p class="card__title">«Теперь это рынок покупателя»: в Татарстане восстанавливается спрос на «вторичку»</p>
+        <p class="card__desc">Экспертный разбор текущей ситуации на рынке вторичной недвижимости региона.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/stavka-i-ipoteka-5865946" target="_blank" rel="noopener">
+        <div class="card__meta">Обзор · Казанские ведомости</div>
+        <p class="card__title">«По традиции сначала ажиотаж»: как рост ключевой ставки отразится на рынке ипотеки</p>
+        <p class="card__desc">Прогноз экспертов и реальные цифры по ипотечному кредитованию в период макроэкономических изменений.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="finance">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="sec__index">02 — Направление</p>
+      <h2>Финансовая журналистика и банковский сектор</h2>
+      <p class="sec__desc">Специализированные материалы о сложных финансовых инструментах и инновациях — с опытом продуктового и имиджевого продвижения.</p>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="https://www.akbars.ru/news/ak-bars-bank-zaklyuchil-pervuyu-sdelku-po-islamskomu-faktoringu/" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · сайт Ак Барс Банка</div>
+        <p class="card__title">Ак Барс Банк заключил первую сделку по исламскому факторингу</p>
+        <p class="card__desc">Сообщение о первой сделке с комментариями участников.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://www.kommersant.ru/doc/8513991?erid=F7NfYUJCUneTVSw9c6j4" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Коммерсантъ-Волга-Урал</div>
+        <p class="card__title">Ак Барс Банк нарастил факторинговый портфель до 36,5 млрд рублей</p>
+        <p class="card__desc">О пионерском опыте внедрения норм исламского финансирования в российский факторинговый рынок.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://www.kommersant.ru/doc/8735528?erid=F7NfYUJCUneVcwkBs7qi" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Коммерсантъ-Волга-Урал</div>
+        <p class="card__title">Ак Барс Банк — соорганизатор первого в истории российского рынка выпуска облигаций сукук</p>
+        <p class="card__desc">О новом продукте и роли банка в историческом для РФ выпуске исламских облигаций.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://www.akbars.ru/news/ak-bars-bank-predstavil-pilot-po-viplate-subsidii-tzifrovim-rublem/" target="_blank" rel="noopener">
+        <div class="card__meta">Лонгрид · сайт Ак Барс Банка</div>
+        <p class="card__title">Ак Барс Банк представил «пилот» по выплате субсидий цифровым рублем</p>
+        <p class="card__desc">Обзор инновационного банковского продукта и его значения для цифровизации государственных услуг.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="special">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="sec__index">03 — Направление</p>
+      <h2>Спецпроекты и нативная журналистика</h2>
+      <p class="sec__desc">Масштабные имиджевые проекты, сочетающие журналистские стандарты с задачами продвижения — в том числе PR-проекты Республики Татарстан. Выступала главным редактором проекта.</p>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="https://tatarstan.top/achievement/v-agropromyshlennyy-kompleks-tatarstana-za-pyat-let-vlozhili-146-mlrd-rubley/" target="_blank" rel="noopener">
+        <div class="card__meta">Лонгрид · tatarstan.top</div>
+        <p class="card__title">Агропромышленный комплекс Татарстана: 146 млрд рублей инвестиций</p>
+        <p class="card__desc">Комплексный обзор инвестиционной привлекательности АПК региона с цифрами, кейсами и планами развития.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://tatarstan.top/achievement/ot-nurlata-do-almetevska-v-tatarstane-obnovyat-dorogi-na-tri-chetverti-milliarda/" target="_blank" rel="noopener">
+        <div class="card__meta">Лонгрид · tatarstan.top</div>
+        <p class="card__title">От Нурлата до Альметьевска: какие дороги обновят в Татарстане в 2025 году</p>
+        <p class="card__desc">Социально ориентированный материал о масштабной инфраструктурной модернизации — понятный и полезный для жителей.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://tatarstan.top/achievement/golubye-ozera-kazani-ot-ekovorot-po-dorozhkam-s-navigatsiey-k-kupelyam/" target="_blank" rel="noopener">
+        <div class="card__meta">Лонгрид · tatarstan.top</div>
+        <p class="card__title">Голубые озера Казани: от эковорот по дорожкам с навигацией к купелям</p>
+        <p class="card__desc">Экологический спецпроект о трансформации природного парка и улучшении туристической инфраструктуры.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://www.tatar-inform.ru/news/trek-minem-dustym-minnixanov-rustam-nabral-svyse-11-mln-prosmotrov-5998257" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Татар-информ</div>
+        <p class="card__title">Трек «Минем дустым — Минниханов Рустам» набрал свыше 11 млн просмотров</p>
+        <p class="card__desc">Освещение вирусного феномена с акцентом на метрики вовлеченности аудитории.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://www.tatar-inform.ru/news/blogery-iz-tatarstana-testiruyut-golosovoi-pomoshhnik-rais-razrabotannyi-v-rt-5978859" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Татар-информ</div>
+        <p class="card__title">Блогеры из Татарстана тестируют голосовой помощник «Раис», разработанный в РТ</p>
+        <p class="card__desc">Материал для молодой цифровой аудитории в рамках нативного продвижения.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="lifestyle">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="sec__index">04 — Направление</p>
+      <h2>Лайфстайл, туризм и обзоры</h2>
+      <p class="sec__desc">Полезные и вовлекающие материалы для широкой аудитории.</p>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="https://kazved.ru/news/gid-dlya-turistov-iz-tatarstana-po-severnoi-osetii-5863944" target="_blank" rel="noopener">
+        <div class="card__meta">Гид · Казанские ведомости</div>
+        <p class="card__title">Где найти снег в июне, коня в театре и почему нельзя крутить пироги: едем в Северную Осетию</p>
+        <p class="card__desc">Нестандартный travel-гид с локальными инсайдами, культурными кодами и практическими советами.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/siski-v-sokolade-ostrog-s-voevodoi-i-podzemelya-tatarskogo-baya-7-pricin-letet-v-tomsk-5851923" target="_blank" rel="noopener">
+        <div class="card__meta">Гид · Казанские ведомости</div>
+        <p class="card__title">Шишки в шоколаде, острог с воеводой и подземелья татарского бая: 7 причин лететь в Томск</p>
+        <p class="card__desc">Подборка неочевидных туристических маршрутов и исторических загадок региона.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/supervygodno-dlya-investitsiy-10-ob-ektov-kulturnogo-naslediya-kotorye-prodayut-v-kazani-seychas-5813978" target="_blank" rel="noopener">
+        <div class="card__meta">Обзор · Казанские ведомости</div>
+        <p class="card__title">Супервыгодно для инвестиций: 10 объектов культурного наследия, которые продают в Казани</p>
+        <p class="card__desc">Уникальная подборка исторических зданий с потенциалом для редевелопмента и бизнес-проектов.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/invessovet-rt-odobril-stroitelstvo-turisticeskogo-kompleksa-v-laisevo-5863170" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Казанские ведомости</div>
+        <p class="card__title">Новый курорт с яхтенной мариной построят за 16 млрд рублей в Лаишево</p>
+        <p class="card__desc">Оперативное освещение крупных инфраструктурных проектов в регионе.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+      <a class="card" href="https://kazved.ru/news/dlya-onlain-prodaz-biletov-na-suda-flota-rt-mogut-ispolzovat-sistemu-rabotayushhuyu-v-krasnoyarske-5866261" target="_blank" rel="noopener">
+        <div class="card__meta">Новость · Казанские ведомости</div>
+        <p class="card__title">«Флот РТ» обсуждает онлайн-продажи билетов на суда с IT-подразделением туроператора</p>
+        <p class="card__desc">О цифровизации регионального туризма и партнерстве с федеральными игроками.</p>
+        <div class="card__arrow">Читать материал</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="sec__index">05 — Контакты</p>
+      <h2>Открыта для проектов и сотрудничества</h2>
+    </div>
+    <div class="contact__grid">
+      <div class="contact__item">
+        <div class="contact__head">
+          <span class="contact__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <span class="contact__label">Телефон</span>
+        </div>
+        <div class="contact__row">
+          <a class="contact__value" href="tel:+79872644469">+7 987 264 44 69</a>
+          <button class="copy copy--dark" type="button" data-copy="+79872644469" aria-label="Скопировать телефон"></button>
+        </div>
+      </div>
+      <div class="contact__item">
+        <div class="contact__head">
+          <span class="contact__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tg"/></svg></span>
+          <span class="contact__label">Telegram</span>
+        </div>
+        <div class="contact__row">
+          <a class="contact__value" href="https://t.me/vvo_23" target="_blank" rel="noopener">@vvo_23</a>
+          <button class="copy copy--dark" type="button" data-copy="@vvo_23" aria-label="Скопировать телеграм"></button>
+        </div>
+      </div>
+      <div class="contact__item">
+        <div class="contact__head">
+          <span class="contact__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg></span>
+          <span class="contact__label">Почта</span>
+        </div>
+        <div class="contact__row">
+          <a class="contact__value" href="mailto:ole-vasilina@yandex.ru">ole-vasilina@yandex.ru</a>
+          <button class="copy copy--dark" type="button" data-copy="ole-vasilina@yandex.ru" aria-label="Скопировать почту"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fab" id="fab">
+  <div class="fab__menu" id="fabMenu">
+    <a class="fab__link" href="mailto:ole-vasilina@yandex.ru"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>ole-vasilina@yandex.ru</a>
+    <a class="fab__link" href="https://t.me/vvo_23" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tg"/></svg>@vvo_23</a>
+    <a class="fab__link" href="tel:+79872644469"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg>+7 987 264 44 69</a>
+  </div>
+  <button class="fab__btn" id="fabBtn" type="button" aria-expanded="false" aria-controls="fabMenu">
+    <span id="fabLabel">Связаться</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="fab__plus" d="M12 5v14M5 12h14"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  /* 1. Раскрытие контактов под кнопкой «Связаться» в шапке */
+  var toggle = document.getElementById('heroToggle');
+  var panel  = document.getElementById('heroContacts');
+
+  toggle.addEventListener('click', function(){
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    if (open) {
+      panel.classList.remove('is-open');
+      panel.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+    } else {
+      panel.hidden = false;
+      /* перезапуск анимации появления */
+      void panel.offsetWidth;
+      panel.classList.add('is-open');
+      toggle.setAttribute('aria-expanded','true');
+    }
+  });
+
+  /* 2. Плавающая кнопка: появляется, когда кнопка в шапке ушла из виду */
+  var fab   = document.getElementById('fab');
+  var fabBtn = document.getElementById('fabBtn');
+  var fabLabel = document.getElementById('fabLabel');
+  var contactsSection = document.getElementById('contacts');
+
+  function showFab(v){
+    fab.classList.toggle('is-visible', v);
+    if (!v) closeFab();
+  }
+  function closeFab(){
+    fab.classList.remove('is-open');
+    fabBtn.setAttribute('aria-expanded','false');
+    fabLabel.textContent = 'Связаться';
+  }
+
+  var heroVisible = true, contactsVisible = false;
+  function sync(){ showFab(!heroVisible && !contactsVisible); }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(e){
+      heroVisible = e[0].isIntersecting; sync();
+    }, {threshold: 0}).observe(toggle);
+
+    new IntersectionObserver(function(e){
+      contactsVisible = e[0].isIntersecting; sync();
+    }, {threshold: 0.12}).observe(contactsSection);
+  } else {
+    showFab(true);
+  }
+
+  fabBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = fab.classList.toggle('is-open');
+    fabBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    fabLabel.textContent = open ? 'Закрыть' : 'Связаться';
+  });
+
+  document.addEventListener('click', function(e){
+    if (!fab.contains(e.target)) closeFab();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeFab();
+  });
+
+  /* 3. Кнопки «скопировать» */
+  function copyText(text){
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject();
+    });
+  }
+
+  var timers = new WeakMap();
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      copyText(btn.dataset.copy).then(function(){
+        btn.classList.add('is-done');
+        clearTimeout(timers.get(btn));
+        timers.set(btn, setTimeout(function(){ btn.classList.remove('is-done'); }, 1800));
+      }).catch(function(){
+        btn.setAttribute('aria-label','Не удалось скопировать');
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
